@@ -8,10 +8,11 @@ class RecipesImporter
     Rails.logger.tagged(logging_tag).info("Starting Recipe Import")
     File.open(@file_path) do |file|
       JSON.parse(file.read).each do |record_data|
-      begin
-        create_recipes(record_data)
-      rescue StandardError => e
-        Rails.logger.tagged(logging_tag).error("Error creating dish with title: #{title}. Error: #{e}")
+        begin
+          create_recipes(record_data)
+        rescue StandardError => e
+          Rails.logger.tagged(logging_tag).error("Error creating dish with title: #{title}. Error: #{e}")
+        end
       end
     end
   end
