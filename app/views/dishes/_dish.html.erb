@@ -15,7 +15,7 @@
     <h4 class="text-sm font-semibold text-gray-800 mb-1">Ingredients:</h4>
     <ul class="list-disc list-inside text-sm text-gray-600">
       <% dish.ingredients.each do |ingredient| %>
-        <% if ingredient.id.to_s.in?(params[:ingredient_ids]) %>
+        <% if ingredient.id.to_s.in?(params[:ingredient_ids] || []) %>
           <li><span class="font-bold"><%= ingredient.name %><span></li>
         <% else %>
           <li><%= ingredient.name %></li>
