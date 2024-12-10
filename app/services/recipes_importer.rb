@@ -45,11 +45,11 @@ class RecipesImporter
   end
 
   def decode_image(image)
-    return unless image.present? 
+    return unless image.present?
 
     uri = URI.parse(image)
     return unless uri.query
-  
+
     params = URI.decode_www_form(uri.query).to_h
     params['url']
   end
