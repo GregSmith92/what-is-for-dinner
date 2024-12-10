@@ -5,12 +5,15 @@ class IngredientParser
   # This range includes:
   # U+00BC (¼), U+00BD (½), U+00BE (¾)
   # and U+2150 through U+2189 cover a variety of fraction forms (⅐, ⅑, ⅒, ⅓, ⅔, etc.)
-  NUMERIC_PART = '(?:\d+(?:\.\d+)?|\d+\s*\d/\d|[\u00BC-\u00BE\u2150-\u2189])'
+  NUMERIC_PART = '(?:\d+(?:\.\d+)?|(?:\.\d+)|\d+\s*\d/\d|[\u00BC-\u00BE\u2150-\u2189])'
   QUANTITY_REGEX = /^((?:#{NUMERIC_PART}(?:\s+#{NUMERIC_PART})*))/
 
   def self.parse(line)
     return [nil, line] if line.blank?
 
+    # remove parenthesis
+    line = line.gsub(/[()]/, '')
+  
     # Remove trailing descriptions, e.g. ", cubed"
     line = line.sub(/,\s.*$/, '').strip
 

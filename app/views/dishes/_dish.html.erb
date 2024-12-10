@@ -1,0 +1,26 @@
+<div class="w-[300px] bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 mb-4 mx-2">
+  <!-- Dish Image -->
+  <img class="w-full h-[225px] object-cover" src="<%= dish.image_url %>" alt="<%= dish.title %>">
+  
+  <!-- Card Content -->
+  <div class="p-4">
+    <!-- Dish Title -->
+    <h3 class="text-xl font-bold text-gray-800 mb-2"><%= dish.title %></h3>
+    
+    <!-- Prep and Cook Time -->
+    <p class="text-sm text-gray-500 mb-1">Prep time: <span class="font-medium"><%= dish.prep_time %> minutes</span></p>
+    <p class="text-sm text-gray-500 mb-4">Cook time: <span class="font-medium"><%= dish.cook_time %> minutes</span></p>
+    
+    <!-- Ingredients -->
+    <h4 class="text-sm font-semibold text-gray-800 mb-1">Ingredients:</h4>
+    <ul class="list-disc list-inside text-sm text-gray-600">
+      <% dish.ingredients.each do |ingredient| %>
+        <% if ingredient.id.to_s.in?(params[:ingredient_ids]) %>
+          <li><span class="font-bold"><%= ingredient.name %><span></li>
+        <% else %>
+          <li><%= ingredient.name %></li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+</div>

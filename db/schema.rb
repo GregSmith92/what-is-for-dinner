@@ -27,10 +27,9 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_06_083958) do
     t.integer "cook_time"
     t.integer "prep_time"
     t.float "ratings"
-    t.string "cuisine"
     t.string "category"
     t.string "author"
-    t.string "image"
+    t.string "image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

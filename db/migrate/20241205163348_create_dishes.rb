@@ -4,11 +4,10 @@ class CreateDishes < ActiveRecord::Migration[8.0]
       t.string :title
       t.integer :cook_time
       t.integer :prep_time
-      t.float :ratings 
-      t.string :cuisine 
+      t.float :ratings
       t.string :category
       t.string :author
-      t.string :image 
+      t.string :image_url
 
       t.timestamps
     end

@@ -1,33 +1,33 @@
-# local file example: file_path = Rails.root.join("storage/json_files/recipes-en.json")
+# Imports recipes from a JSON file, splitting into Dishes and Ingredients
 class RecipesImporter
-  def initialize(file_path)
+  def initialize(file_path: Rails.root.join("storage/json_files/recipes-en.json"))
     @file_path = file_path
   end
 
   def import
-    Rails.logger.tagged(logging_tag).info("Starting Recipe Import")
+    Rails.logger.info("Starting Recipe Import")
     File.open(@file_path) do |file|
       JSON.parse(file.read).each do |record_data|
         begin
           create_recipes(record_data)
         rescue StandardError => e
-          Rails.logger.tagged(logging_tag).error("Error creating dish with title: #{title}. Error: #{e}")
+          Rails.logger.error("Error creating dish with title: #{record_data["title"]}. Error: #{e}")
         end
       end
     end
+    true
   end
 
   private
 
-  def create_recipe(recipe_data)
+  def create_recipes(recipe_data)
     # Find or create Dish
     dish = Dish.find_or_create_by!(title: recipe_data["title"], author: recipe_data["author"]) do |d|
       d.cook_time = recipe_data["cook_time"]
       d.prep_time = recipe_data["prep_time"]
       d.ratings = recipe_data["ratings"]
-      d.cuisine = recipe_data["cuisine"]
       d.category = recipe_data["category"]
-      d.image_url = recipe_data["image"]
+      d.image_url = decode_image(recipe_data["image"])
     end
 
     # Add ingredients to the dish
@@ -42,5 +42,15 @@ class RecipesImporter
         quantity: quantity
       )
     end
+  end
+
+  def decode_image(image)
+    return unless image.present? 
+
+    uri = URI.parse(image)
+    return unless uri.query
+  
+    params = URI.decode_www_form(uri.query).to_h
+    params['url']
   end
 end
