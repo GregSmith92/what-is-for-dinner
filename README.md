@@ -3,6 +3,8 @@
 ## About
 Hosted on Hetzner VPS, deployed with Kamal, SQlite database, Rails 8
 
+Visit at: https://whatisfordinner.food/
+
 ## User Stories
 
 ### 1. I want to search for recipes based on the ingredients I have at home, so I can find meals that have the best match for ingredients I have at home
