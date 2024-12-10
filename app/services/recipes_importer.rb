@@ -1,6 +1,6 @@
 # Imports recipes from a JSON file, splitting into Dishes and Ingredients
 class RecipesImporter
-  def initialize(file_path: Rails.root.join("storage/json_files/recipes-en.json"))
+  def initialize(file_path: Rails.root.join("config/data/recipes-en.json"))
     @file_path = file_path
   end
 
