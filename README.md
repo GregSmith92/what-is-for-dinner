@@ -1,7 +1,7 @@
 # README
 
 ## About
-Hosted on Hetzner VPS, deployed with Kamal, SQlite databse, Rails 8
+Hosted on Hetzner VPS, deployed with Kamal, SQlite database, Rails 8
 
 ## User Stories
 
